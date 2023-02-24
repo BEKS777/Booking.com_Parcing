@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data vizualization</title>
+  </head>
+  <body>
+    <div>
+      <canvas id="scoreChart"></canvas>
+      <canvas id="myChart"></canvas>
+      <canvas style="width: 100px; height: 100px;" id="score2Chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      var scores = [
+        { score: 1, count: 1 },
+        { score: 6, count: 1 },
+        { score: 6.1, count: 1 },
+        { score: 6.3, count: 3 },
+        { score: 6.5, count: 1 },
+        { score: 6.6, count: 1 },
+        { score: 7.6, count: 2 },
+        { score: 7.7, count: 3 },
+        { score: 7.8, count: 3 },
+        { score: 8, count: 16 },
+        { score: 8.1, count: 9 },
+        { score: 8.3, count: 8 },
+        { score: 8.5, count: 9 },
+        { score: 8.6, count: 8 },
+        { score: 9, count: 25 },
+        { score: 9.1, count: 9 },
+        { score: 9.7, count: 18 },
+        { score: 10, count: 61 },
+      ];
+
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: scores.map(function (d) {
+            return d.score;
+          }),
+          datasets: [
+            {
+              label: "Number of Hotels(score)",
+              data: scores.map(function (d) {
+                return d.count;
+              }),
+              backgroundColor: "rgba(222, 45, 67, 0.2)",
+              borderColor: "rgba(255, 45, 67, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+      var ctx1 = document.getElementById("scoreChart").getContext("2d");
+      var scoreChart = new Chart(ctx1, {
+        type: "bar",
+        data: {
+          labels: [
+            "Average score",
+            "Highest Scored Hotel",
+            "Least Scored Hotel",
+          ],
+          datasets: [
+            {
+              label: "scores",
+              data: [
+                // replace with the values from the aggregate query
+                8.9, //avg
+                10,
+                1,
+              ],
+              backgroundColor: [
+                "#F9C70C",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 99, 132, 0.2)",
+              ],
+              borderColor: [
+                "#FBB117",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 99, 132, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+     
+        
+    </script>
+  </body>
+</html>
